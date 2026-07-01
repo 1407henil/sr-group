@@ -1,0 +1,33 @@
+---
+interface Props {
+  size?: number;
+  class?: string;
+}
+const { size = 56, class: className = '' } = Astro.props;
+---
+<svg
+  class={className}
+  width={size}
+  height={size}
+  viewBox="0 0 100 100"
+  xmlns="http://www.w3.org/2000/svg"
+  role="img"
+  aria-label="SR Group monogram"
+>
+  <circle
+    cx="50" cy="50" r="46"
+    fill="none"
+    stroke="#C49A2A"
+    stroke-width="1.1"
+    stroke-dasharray="3.2 4.2"
+  />
+  <text
+    x="50" y="63"
+    text-anchor="middle"
+    font-family="'Cormorant Garamond', serif"
+    font-style="italic"
+    font-weight="600"
+    font-size="40"
+    fill="#0C0153"
+  >SR</text>
+</svg>

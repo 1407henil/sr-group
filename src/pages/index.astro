@@ -1,0 +1,293 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Monogram from '../components/Monogram.astro';
+
+const companies = [
+  {
+    name: 'S R Industries',
+    focus: 'Distilled chemicals & solvents',
+    desc: 'Distillation and purification of industrial solvents, supplying consistent, spec-grade output for downstream manufacturing.',
+    href: '/companies/sr-industries',
+  },
+  {
+    name: 'S R Plast',
+    focus: 'Industrial chemicals',
+    desc: 'Processing and supply of industrial chemical inputs for plastics, coatings, and allied manufacturing sectors.',
+    href: '/companies/sr-plast',
+  },
+  {
+    name: 'SR Polymers',
+    focus: 'Unsaturated polyester resins',
+    desc: 'UPR manufacturing at approximately 6,000 MT per year, serving composite, coating, and construction applications.',
+    href: '/companies/sr-polymers',
+  },
+];
+
+const stats = [
+  { value: '1997', label: 'Founded' },
+  { value: '3', label: 'Manufacturing entities' },
+  { value: '6,000 MT', label: 'UPR capacity / year' },
+  { value: 'GIDC Chhatral', label: 'Gujarat, India' },
+];
+
+const industries = [
+  'Paints & Coatings', 'Composites', 'Construction', 'Adhesives', 'Textiles', 'Plastics Processing',
+];
+---
+<Layout
+  title="Industrial Chemicals, Solvents & Polyester Resins"
+  description="SR Group manufactures distilled chemicals, solvents, industrial chemicals, and unsaturated polyester resins from Gujarat, India, since 1997."
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero-inner">
+      <svg class="hero-arc" viewBox="0 0 600 600" aria-hidden="true">
+        <circle cx="300" cy="300" r="280" fill="none" stroke="#C49A2A" stroke-width="1" stroke-dasharray="3 5" opacity="0.5"/>
+      </svg>
+
+      <span class="eyebrow">SR Group · Since 1997</span>
+      <h1>Manufacturing the industrial<br/>inputs that build things.</h1>
+      <p class="hero-lede">
+        Three companies, one group: distilled chemicals and solvents, industrial chemicals,
+        and unsaturated polyester resins — manufactured in Gujarat and supplied across India and export markets.
+      </p>
+      <div class="hero-actions">
+        <a href="/products" class="btn btn-gold">View Products</a>
+        <a href="/contact" class="btn">Request a Quote</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- COMPANIES -->
+  <section class="section companies">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Our Companies</span>
+        <h2>Three entities. One manufacturing group.</h2>
+      </div>
+
+      <div class="company-grid">
+        {companies.map((c) => (
+          <a href={c.href} class="company-card card">
+            <span class="company-focus">{c.focus}</span>
+            <h3>{c.name}</h3>
+            <p>{c.desc}</p>
+            <span class="company-link">Learn more →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <section class="stats-strip">
+    <div class="container stats-grid">
+      {stats.map((s) => (
+        <div class="stat">
+          <span class="stat-value">{s.value}</span>
+          <span class="stat-label">{s.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- INDUSTRIES -->
+  <section class="section industries">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Industries Served</span>
+        <h2>Built into products across sectors.</h2>
+      </div>
+      <ul class="industry-list">
+        {industries.map((i) => <li>{i}</li>)}
+      </ul>
+      <a href="/industries-served" class="btn">See all industries</a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-band">
+    <div class="container cta-inner">
+      <Monogram size={52} class="cta-mark" />
+      <h2>Sourcing chemicals or resins for your next order?</h2>
+      <p>Talk to SR Group about capacity, specifications, and export inquiries.</p>
+      <a href="/contact" class="btn btn-gold">Get in Touch</a>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .hero {
+    position: relative;
+    padding: var(--space-7) 0 var(--space-6);
+    overflow: hidden;
+  }
+
+  .hero-inner {
+    position: relative;
+    max-width: 760px;
+  }
+
+  .hero-arc {
+    position: absolute;
+    top: -140px;
+    right: -220px;
+    width: 560px;
+    height: 560px;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .hero .eyebrow {
+    margin-bottom: var(--space-2);
+  }
+
+  .hero h1 {
+    position: relative;
+    margin-bottom: var(--space-3);
+  }
+
+  .hero-lede {
+    font-size: 1.15rem;
+    color: var(--ink);
+    max-width: 560px;
+    margin-bottom: var(--space-4);
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: var(--space-2);
+    flex-wrap: wrap;
+  }
+
+  .section-head {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    margin-bottom: var(--space-4);
+    max-width: 620px;
+  }
+
+  .company-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--space-3);
+  }
+
+  .company-card {
+    padding: var(--space-4) var(--space-3);
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-1);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .company-card:hover {
+    border-color: var(--gold);
+    transform: translateY(-3px);
+  }
+
+  .company-focus {
+    font-family: var(--font-data);
+    font-size: 0.7rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .company-card h3 {
+    margin-top: 0.3rem;
+  }
+
+  .company-card p {
+    font-size: 0.92rem;
+    color: var(--ink-faint);
+    flex-grow: 1;
+  }
+
+  .company-link {
+    margin-top: var(--space-1);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--navy);
+  }
+
+  .stats-strip {
+    background: var(--navy);
+    padding: var(--space-4) 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--space-3);
+  }
+
+  .stat {
+    display: flex;
+    flex-direction: column;
+    gap: 0.3rem;
+    border-left: 1px solid rgba(196, 154, 42, 0.35);
+    padding-left: var(--space-2);
+  }
+
+  .stat-value {
+    font-family: var(--font-display);
+    font-size: 1.9rem;
+    font-weight: 600;
+    color: var(--cream);
+  }
+
+  .stat-label {
+    font-family: var(--font-data);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--gold-soft);
+  }
+
+  .industry-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.7rem;
+  }
+
+  .industry-list li {
+    font-size: 0.88rem;
+    padding: 0.55em 1.1em;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--paper);
+  }
+
+  .cta-band {
+    background: var(--paper);
+    border-top: 1px solid var(--line);
+    padding: var(--space-6) 0;
+    text-align: center;
+  }
+
+  .cta-inner {
+    max-width: 560px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  .cta-inner h2 { margin-top: var(--space-1); }
+
+  .cta-inner p {
+    color: var(--ink-faint);
+    margin-bottom: var(--space-1);
+  }
+
+  @media (max-width: 860px) {
+    .company-grid { grid-template-columns: 1fr; }
+    .stats-grid { grid-template-columns: repeat(2, 1fr); }
+    .hero-arc { display: none; }
+  }
+</style>

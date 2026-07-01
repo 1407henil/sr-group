@@ -1,0 +1,174 @@
+---
+import Monogram from './Monogram.astro';
+
+const links = [
+  { href: '/about', label: 'About' },
+  { href: '/companies', label: 'Our Companies' },
+  { href: '/products', label: 'Products' },
+  { href: '/industries-served', label: 'Industries Served' },
+  { href: '/infrastructure', label: 'Infrastructure' },
+  { href: '/downloads', label: 'Downloads' },
+];
+---
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="brand" aria-label="SR Group home">
+      <Monogram size={42} />
+      <span class="brand-word">
+        <span class="brand-name">SR Group</span>
+        <span class="brand-since">Est. 1997</span>
+      </span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      {links.map(link => (
+        <a href={link.href}>{link.label}</a>
+      ))}
+    </nav>
+
+    <a href="/contact" class="btn header-cta">Get in Touch</a>
+
+    <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" id="navToggle">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+
+  <nav class="nav-mobile" id="navMobile" aria-label="Mobile">
+    {links.map(link => (
+      <a href={link.href}>{link.label}</a>
+    ))}
+    <a href="/contact" class="btn btn-gold" style="margin-top: 0.5rem;">Get in Touch</a>
+  </nav>
+</header>
+
+<style>
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: rgba(245, 239, 224, 0.92);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    gap: var(--space-4);
+    padding-top: var(--space-2);
+    padding-bottom: var(--space-2);
+  }
+
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    margin-right: auto;
+  }
+
+  .brand-word {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.15;
+  }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--navy);
+    letter-spacing: 0.01em;
+  }
+
+  .brand-since {
+    font-family: var(--font-data);
+    font-size: 0.62rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .nav {
+    display: flex;
+    gap: var(--space-4);
+    font-size: 0.88rem;
+    font-weight: 500;
+  }
+
+  .nav a {
+    color: var(--ink);
+    position: relative;
+    padding-bottom: 2px;
+  }
+
+  .nav a:hover {
+    color: var(--navy);
+  }
+
+  .nav a::after {
+    content: '';
+    position: absolute;
+    left: 0; right: 0; bottom: -3px;
+    height: 1px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.25s ease;
+  }
+
+  .nav a:hover::after {
+    transform: scaleX(1);
+  }
+
+  .header-cta {
+    padding: 0.65em 1.3em;
+    font-size: 0.8rem;
+  }
+
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 32px;
+    height: 32px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+  }
+
+  .nav-toggle span {
+    display: block;
+    height: 1.5px;
+    background: var(--navy);
+    border-radius: 1px;
+  }
+
+  .nav-mobile {
+    display: none;
+    flex-direction: column;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3) var(--space-3);
+    border-top: 1px solid var(--line);
+    font-size: 1rem;
+  }
+
+  .nav-mobile.open {
+    display: flex;
+  }
+
+  @media (max-width: 860px) {
+    .nav, .header-cta { display: none; }
+    .nav-toggle { display: flex; }
+  }
+</style>
+
+<script>
+  const toggle = document.getElementById('navToggle');
+  const mobile = document.getElementById('navMobile');
+  toggle?.addEventListener('click', () => {
+    const isOpen = mobile?.classList.toggle('open');
+    toggle.setAttribute('aria-expanded', String(!!isOpen));
+  });
+</script>

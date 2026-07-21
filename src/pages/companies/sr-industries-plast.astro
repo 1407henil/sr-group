@@ -1,0 +1,278 @@
+---
+import Layout from '../../layouts/Layout.astro';
+
+const base = import.meta.env.BASE_URL;
+
+const highlights = [
+  'Since 1997',
+  'Integrated Manufacturing Operations',
+  'Precision-Controlled Production Processes',
+  'Consistent Batch Quality',
+  'Bulk Manufacturing Capability',
+  'Reliable Packaging & Dispatch',
+];
+
+const distilled = {
+  glycols: [
+    { name: 'Mono Ethylene Glycol (MEG)', slug: 'meg-distilled' },
+    { name: 'Di Ethylene Glycol (DEG)', slug: 'deg-distilled' },
+    { name: 'Tri Ethylene Glycol (TEG)', slug: 'teg' },
+  ],
+  chlorinated: [
+    { name: 'Trichloroethylene (TCE)', slug: 'tce' },
+    { name: 'Ethylene Dichloride LE (EDC LE)', slug: 'edc-le' },
+  ],
+};
+
+const pure = {
+  glycols: [
+    { name: 'Mono Ethylene Glycol (MEG)', slug: 'meg-pure' },
+    { name: 'Di Ethylene Glycol (DEG)', slug: 'deg-pure' },
+  ],
+  chlorinated: [
+    { name: 'SRSolv (TCE)', slug: 'srsolv' },
+  ],
+};
+---
+<Layout
+  title="S R Industries & S R Plast"
+  description="S R Industries and S R Plast manufacture industrial chemicals and distilled solvents, operating from S R Group's Chhatral GIDC facility in Gujarat since 1997."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="page-label">S R Industries &amp; S R Plast</span>
+      <h1>Precision, refined<br/>into every batch.</h1>
+    </div>
+  </section>
+
+  <hr class="rule-dashed container-rule" />
+
+  <section class="section about-companies">
+    <div class="container">
+      <h2 class="about-heading">Manufacturing Excellence Since 1997</h2>
+      <div class="about-copy">
+        <p>
+          Established in 1997 as part of the founding of S R Group, S R Industries and S R Plast
+          have been at the core of the group's manufacturing operations, producing industrial
+          chemicals and distilled solvents for customers across a wide range of industries.
+        </p>
+        <p>
+          Operating from our manufacturing facility in Chhatral GIDC, Gujarat, we combine decades
+          of manufacturing experience with well-developed production processes designed to deliver
+          consistent quality, reliable performance, and dependable supply. Every stage of production
+          is carried out with careful process control and quality monitoring to ensure products meet
+          the specifications and expectations of our customers.
+        </p>
+        <p>
+          Our integrated manufacturing operations enable efficient production, streamlined processing,
+          and reliable dispatch, allowing us to serve both routine requirements and large-volume
+          industrial demands with confidence.
+        </p>
+        <p>
+          Over the years, we have continued to strengthen our capabilities by refining our processes,
+          adopting modern manufacturing practices, and investing in continuous improvement. While
+          technology and operations have evolved, our commitment remains the same — to manufacture
+          dependable products, build long-term partnerships, and conduct business with integrity and
+          transparency.
+        </p>
+        <p class="explore-line">
+          Explore our product range below to learn more about the industrial chemicals and distilled
+          solvents manufactured by S R Industries &amp; S R Plast.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section highlights">
+    <div class="container">
+      <ul class="highlight-grid">
+        {highlights.map((h) => <li>{h}</li>)}
+      </ul>
+    </div>
+  </section>
+
+  <hr class="rule-dashed container-rule" />
+
+  <section class="section products">
+    <div class="container">
+      <h2 class="products-title">Product Categories</h2>
+
+      <div class="product-groups">
+        <div class="product-group">
+          <h3 class="group-title">Distilled</h3>
+
+          <div class="sub-group">
+            <span class="sub-label">Glycols</span>
+            <ul class="product-list">
+              {distilled.glycols.map((p) => (
+                <li><a href={`${base}products#${p.slug}`}>{p.name}</a></li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="sub-group">
+            <span class="sub-label">Chlorinated</span>
+            <ul class="product-list">
+              {distilled.chlorinated.map((p) => (
+                <li><a href={`${base}products#${p.slug}`}>{p.name}</a></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div class="product-group">
+          <h3 class="group-title">Pure</h3>
+
+          <div class="sub-group">
+            <span class="sub-label">Glycols</span>
+            <ul class="product-list">
+              {pure.glycols.map((p) => (
+                <li><a href={`${base}products#${p.slug}`}>{p.name}</a></li>
+              ))}
+            </ul>
+          </div>
+
+          <div class="sub-group">
+            <span class="sub-label">Chlorinated</span>
+            <ul class="product-list">
+              {pure.chlorinated.map((p) => (
+                <li><a href={`${base}products#${p.slug}`}>{p.name}</a></li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero { padding: var(--space-5) 0 var(--space-3); }
+
+  .page-label {
+    display: inline-block;
+    font-family: var(--font-data);
+    font-size: 0.95rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    border-bottom: 2px solid var(--gold);
+    padding-bottom: 8px;
+    margin-bottom: var(--space-3);
+  }
+
+  .page-hero h1 { max-width: 760px; }
+
+  .container-rule { max-width: var(--container); margin: 0 auto; }
+
+  .about-companies { padding: var(--space-5) 0 var(--space-4); }
+
+  .about-heading { font-size: 2rem; margin-bottom: var(--space-3); max-width: 560px; }
+
+  .about-copy {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+    max-width: 700px;
+  }
+
+  .about-copy p {
+    font-size: 1.02rem;
+    line-height: 1.75;
+    color: var(--ink);
+  }
+
+  .explore-line {
+    color: var(--ink-faint);
+    font-style: italic;
+    margin-top: var(--space-1);
+  }
+
+  .highlights { padding: var(--space-3) 0 var(--space-4); }
+
+  .highlight-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .highlight-grid li {
+    background: var(--paper);
+    padding: var(--space-3);
+    font-family: var(--font-display);
+    font-size: 1.15rem;
+    color: var(--navy);
+    line-height: 1.35;
+  }
+
+  .products { padding-top: var(--space-4); }
+
+  .products-title {
+    font-size: 2rem;
+    margin-bottom: var(--space-3);
+  }
+
+  .product-groups {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .product-group {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  .group-title {
+    font-size: 1.6rem;
+    padding-bottom: var(--space-2);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .sub-group { display: flex; flex-direction: column; gap: var(--space-2); }
+
+  .sub-label {
+    font-family: var(--font-data);
+    font-size: 0.72rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .product-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .product-list a {
+    font-size: 1.05rem;
+    color: var(--navy);
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s ease, opacity 0.15s ease;
+  }
+
+  .product-list a:hover {
+    border-bottom-color: var(--gold);
+  }
+
+  @media (max-width: 860px) {
+    .highlight-grid { grid-template-columns: 1fr 1fr; }
+    .product-groups { grid-template-columns: 1fr; gap: var(--space-4); }
+  }
+
+  @media (max-width: 560px) {
+    .highlight-grid { grid-template-columns: 1fr; }
+  }
+</style>

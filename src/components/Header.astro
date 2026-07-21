@@ -1,32 +1,52 @@
 ---
-import Monogram from './Monogram.astro';
+const base = import.meta.env.BASE_URL;
+
+const companiesMenu = [
+  { href: 'companies/sr-industries-plast', label: 'S R Industries' },
+  { href: 'companies/sr-industries-plast', label: 'S R Plast' },
+  { href: 'companies/sr-polymers', label: 'S R Polymers' },
+];
 
 const links = [
-  { href: '/about', label: 'About' },
-  { href: '/companies', label: 'Our Companies' },
-  { href: '/products', label: 'Products' },
-  { href: '/industries-served', label: 'Industries Served' },
-  { href: '/infrastructure', label: 'Infrastructure' },
-  { href: '/downloads', label: 'Downloads' },
+  { href: 'about', label: 'About' },
+  { href: 'products', label: 'Products' },
+  { href: 'industries-served', label: 'Industries Served' },
+  { href: 'infrastructure', label: 'Infrastructure' },
+  { href: 'downloads', label: 'Downloads' },
 ];
 ---
 <header class="site-header">
   <div class="container header-inner">
-    <a href="/" class="brand" aria-label="SR Group home">
-      <Monogram size={42} />
+    <a href={base} class="brand" aria-label="S R Group home">
+      <img src={`${base}logo/sr-logo-gold.png`} alt="S R Group" class="brand-mark" width="68" height="74" />
       <span class="brand-word">
-        <span class="brand-name">SR Group</span>
+        <span class="brand-name">S R Group</span>
         <span class="brand-since">Est. 1997</span>
       </span>
     </a>
 
     <nav class="nav" aria-label="Primary">
-      {links.map(link => (
-        <a href={link.href}>{link.label}</a>
-      ))}
+      <a href={`${base}about`}>About</a>
+
+      <div class="nav-dropdown">
+        <button class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+          Our Companies
+          <svg class="chevron" width="10" height="6" viewBox="0 0 10 6" fill="none"><path d="M1 1L5 5L9 1" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        </button>
+        <div class="nav-dropdown-menu">
+          {companiesMenu.map(item => (
+            <a href={`${base}${item.href}`}>{item.label}</a>
+          ))}
+        </div>
+      </div>
+
+      <a href={`${base}products`}>Products</a>
+      <a href={`${base}industries-served`}>Industries Served</a>
+      <a href={`${base}infrastructure`}>Infrastructure</a>
+      <a href={`${base}downloads`}>Downloads</a>
     </nav>
 
-    <a href="/contact" class="btn header-cta">Get in Touch</a>
+    <a href={`${base}contact`} class="btn header-cta">Get in Touch</a>
 
     <button class="nav-toggle" aria-label="Open menu" aria-expanded="false" id="navToggle">
       <span></span><span></span><span></span>
@@ -34,10 +54,18 @@ const links = [
   </div>
 
   <nav class="nav-mobile" id="navMobile" aria-label="Mobile">
-    {links.map(link => (
-      <a href={link.href}>{link.label}</a>
+    <a href={`${base}about`}>About</a>
+
+    <span class="nav-mobile-label">Our Companies</span>
+    {companiesMenu.map(item => (
+      <a href={`${base}${item.href}`} class="nav-mobile-sub">{item.label}</a>
     ))}
-    <a href="/contact" class="btn btn-gold" style="margin-top: 0.5rem;">Get in Touch</a>
+
+    <a href={`${base}products`}>Products</a>
+    <a href={`${base}industries-served`}>Industries Served</a>
+    <a href={`${base}infrastructure`}>Infrastructure</a>
+    <a href={`${base}downloads`}>Downloads</a>
+    <a href={`${base}contact`} class="btn btn-gold" style="margin-top: 0.5rem;">Get in Touch</a>
   </nav>
 </header>
 
@@ -64,6 +92,13 @@ const links = [
     align-items: center;
     gap: 0.7rem;
     margin-right: auto;
+    text-decoration: none;
+  }
+
+  .brand-mark {
+    width: 68px;
+    height: auto;
+    display: block;
   }
 
   .brand-word {
@@ -73,10 +108,10 @@ const links = [
   }
 
   .brand-name {
-    font-family: var(--font-display);
-    font-size: 1.15rem;
-    font-weight: 600;
-    color: var(--navy);
+    font-family: var(--font-word);
+    font-weight: 700;
+    font-size: 1.35rem;
+    color: var(--gold-word);
     letter-spacing: 0.01em;
   }
 
@@ -90,22 +125,16 @@ const links = [
 
   .nav {
     display: flex;
+    align-items: center;
     gap: var(--space-4);
     font-size: 0.88rem;
     font-weight: 500;
   }
 
-  .nav a {
-    color: var(--ink);
-    position: relative;
-    padding-bottom: 2px;
-  }
+  .nav > a { color: var(--ink); position: relative; padding-bottom: 2px; text-decoration: none; }
+  .nav > a:hover { color: var(--navy); }
 
-  .nav a:hover {
-    color: var(--navy);
-  }
-
-  .nav a::after {
+  .nav > a::after {
     content: '';
     position: absolute;
     left: 0; right: 0; bottom: -3px;
@@ -116,14 +145,68 @@ const links = [
     transition: transform 0.25s ease;
   }
 
-  .nav a:hover::after {
-    transform: scaleX(1);
+  .nav > a:hover::after { transform: scaleX(1); }
+
+  /* Dropdown */
+  .nav-dropdown {
+    position: relative;
   }
 
-  .header-cta {
-    padding: 0.65em 1.3em;
-    font-size: 0.8rem;
+  .nav-dropdown-trigger {
+    display: flex;
+    align-items: center;
+    gap: 0.4em;
+    background: none;
+    border: none;
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    padding: 0;
   }
+
+  .nav-dropdown-trigger:hover { color: var(--navy); }
+  .chevron { transition: transform 0.2s ease; }
+
+  .nav-dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: -14px;
+    margin-top: 14px;
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    min-width: 180px;
+    padding: 6px;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.18s ease, transform 0.18s ease, visibility 0.18s;
+    box-shadow: 0 12px 28px rgba(12, 1, 83, 0.08);
+  }
+
+  .nav-dropdown:hover .nav-dropdown-menu,
+  .nav-dropdown:focus-within .nav-dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .nav-dropdown:hover .chevron { transform: rotate(180deg); }
+
+  .nav-dropdown-menu a {
+    display: block;
+    padding: 9px 12px;
+    font-size: 0.87rem;
+    color: var(--ink);
+    text-decoration: none;
+    border-radius: 2px;
+  }
+
+  .nav-dropdown-menu a:hover { background: var(--cream); color: var(--navy); }
+
+  .header-cta { padding: 0.65em 1.3em; font-size: 0.8rem; text-decoration: none; }
 
   .nav-toggle {
     display: none;
@@ -138,25 +221,29 @@ const links = [
     padding: 0;
   }
 
-  .nav-toggle span {
-    display: block;
-    height: 1.5px;
-    background: var(--navy);
-    border-radius: 1px;
-  }
+  .nav-toggle span { display: block; height: 1.5px; background: var(--navy); border-radius: 1px; }
 
   .nav-mobile {
     display: none;
     flex-direction: column;
-    gap: var(--space-2);
+    gap: 0.4rem;
     padding: var(--space-2) var(--space-3) var(--space-3);
     border-top: 1px solid var(--line);
     font-size: 1rem;
   }
 
-  .nav-mobile.open {
-    display: flex;
+  .nav-mobile a { color: var(--ink); text-decoration: none; padding: 0.3rem 0; }
+  .nav-mobile-label {
+    font-family: var(--font-data);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-top: 0.5rem;
   }
+  .nav-mobile-sub { padding-left: 0.75rem; font-size: 0.92rem; color: var(--ink-faint); }
+
+  .nav-mobile.open { display: flex; }
 
   @media (max-width: 860px) {
     .nav, .header-cta { display: none; }

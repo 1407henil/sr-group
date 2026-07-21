@@ -8,7 +8,7 @@ interface Props {
   description: string;
 }
 const { title, description } = Astro.props;
-const pageTitle = `${title} · SR Group`;
+const pageTitle = `${title} · S R Group`;
 ---
 <!doctype html>
 <html lang="en">
@@ -20,20 +20,19 @@ const pageTitle = `${title} · SR Group`;
     <meta name="description" content={description} />
     <meta name="generator" content={Astro.generator} />
 
-    <!-- Open Graph -->
     <meta property="og:title" content={pageTitle} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="SR Group" />
+    <meta property="og:site_name" content="S R Group" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;1,600&family=EB+Garamond:wght@700&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "Organization",
-      "name": "SR Group",
+      "name": "S R Group",
       "url": "https://www.srindp.com",
       "foundingDate": "1997",
       "description": "Industrial chemicals, solvents, glycols and polyester resin manufacturer based in Gujarat, India.",

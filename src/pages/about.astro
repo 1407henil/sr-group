@@ -1,0 +1,125 @@
+---
+import Layout from '../layouts/Layout.astro';
+
+const values = [
+  'Transparent business practices',
+  'Consistent quality',
+  'Lasting relationships through trust, reliability, and continuous improvement',
+];
+---
+<Layout
+  title="About S R Group"
+  description="S R Group is a family-owned chemical manufacturing group based in Chhatral GIDC, Gujarat, established in 1997 by the late Shri Ramanbhai Patel and his sons."
+>
+  <section class="page-hero">
+    <div class="container">
+      <span class="eyebrow">About S R Group</span>
+      <h1>Built on Trust.<br/>Driven by Family Values.</h1>
+    </div>
+  </section>
+
+  <hr class="rule-dashed container-rule" />
+
+  <section class="section story">
+    <div class="container story-grid">
+      <div class="story-copy">
+        <p>
+          S R Group is a family-owned chemical manufacturing group based in Chhatral GIDC, Gujarat.
+        </p>
+        <p>
+          Established in 1997 by the late Shri Ramanbhai Patel together with his sons, Nilesh Patel and Krushi Patel,
+          the company was founded with a clear vision — to build a business rooted in integrity, dependable products,
+          and lasting customer relationships.
+        </p>
+        <p>
+          Over the years, S R Group has grown into three manufacturing companies —<br/>
+          S R Industries, S R Plast, and S R Polymers — manufacturing industrial chemicals, distilled solvents,
+          and unsaturated polyester resins for customers across India while steadily expanding into international markets.
+        </p>
+        <p>
+          With a strong foundation built over nearly three decades, Henil Patel and Kushal Patel represent the next
+          generation of S R Group, carrying forward its legacy by combining the company's core values with a modern
+          approach to manufacturing and innovation.
+        </p>
+        <p>
+          As the business continues to evolve, the principles on which it was founded remain unchanged.
+        </p>
+      </div>
+
+      <aside class="story-values">
+        <span class="eyebrow">We Believe In</span>
+        <ul>
+          {values.map((v) => <li>{v}</li>)}
+        </ul>
+      </aside>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .page-hero { padding: var(--space-6) 0 var(--space-4); }
+  .page-hero .eyebrow { margin-bottom: var(--space-2); }
+  .page-hero h1 { max-width: 780px; }
+
+  .container-rule { max-width: var(--container); margin: 0 auto; }
+
+  .story { padding-top: var(--space-6); }
+
+  .story-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: var(--space-6);
+    align-items: start;
+  }
+
+  .story-copy { display: flex; flex-direction: column; gap: var(--space-3); max-width: 620px; }
+
+  .story-copy p {
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--ink);
+    text-align: justify;
+    text-justify: inter-word;
+    hyphens: auto;
+  }
+
+  .story-copy p:first-child {
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--navy);
+    line-height: 1.5;
+  }
+
+  .story-values {
+    position: sticky;
+    top: 110px;
+    border-left: 1px dashed var(--gold);
+    padding-left: var(--space-4);
+  }
+
+  .story-values .eyebrow { margin-bottom: var(--space-3); display: block; }
+
+  .story-values ul { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--space-3); }
+
+  .story-values li {
+    font-family: var(--font-display);
+    font-size: 1.2rem;
+    color: var(--navy);
+    line-height: 1.4;
+    padding-bottom: var(--space-3);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .story-values li:last-child { border-bottom: none; padding-bottom: 0; }
+
+  @media (max-width: 860px) {
+    .story-grid { grid-template-columns: 1fr; gap: var(--space-4); }
+    .story-values {
+      position: static;
+      border-left: none;
+      border-top: 1px dashed var(--gold);
+      padding-left: 0;
+      padding-top: var(--space-3);
+    }
+  }
+</style>

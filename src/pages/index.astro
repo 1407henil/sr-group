@@ -1,33 +1,36 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Monogram from '../components/Monogram.astro';
 
-const companies = [
-  {
-    name: 'S R Industries',
-    focus: 'Distilled chemicals & solvents',
-    desc: 'Distillation and purification of industrial solvents, supplying consistent, spec-grade output for downstream manufacturing.',
-    href: '/companies/sr-industries',
-  },
-  {
-    name: 'S R Plast',
-    focus: 'Industrial chemicals',
-    desc: 'Processing and supply of industrial chemical inputs for plastics, coatings, and allied manufacturing sectors.',
-    href: '/companies/sr-plast',
-  },
-  {
-    name: 'SR Polymers',
-    focus: 'Unsaturated polyester resins',
-    desc: 'UPR manufacturing at approximately 6,000 MT per year, serving composite, coating, and construction applications.',
-    href: '/companies/sr-polymers',
-  },
-];
+const base = import.meta.env.BASE_URL;
 
 const stats = [
   { value: '1997', label: 'Founded' },
-  { value: '3', label: 'Manufacturing entities' },
+  { value: '03', label: 'Manufacturing entities' },
   { value: '6,000 MT', label: 'UPR capacity / year' },
-  { value: 'GIDC Chhatral', label: 'Gujarat, India' },
+];
+
+const companies = [
+  {
+    n: '01',
+    name: 'S R Industries',
+    focus: 'Distilled chemicals & solvents',
+    desc: 'Distillation and purification of industrial solvents, supplying consistent, spec-grade output for downstream manufacturing.',
+    href: 'companies/sr-industries-plast',
+  },
+  {
+    n: '02',
+    name: 'S R Plast',
+    focus: 'Industrial chemicals',
+    desc: 'Processing and supply of industrial chemical inputs for plastics, coatings, and allied manufacturing sectors.',
+    href: 'companies/sr-industries-plast',
+  },
+  {
+    n: '03',
+    name: 'S R Polymers',
+    focus: 'Unsaturated polyester resins',
+    desc: 'UPR manufacturing at approximately 6,000 MT per year, serving composite, coating, and construction applications.',
+    href: 'companies/sr-polymers',
+  },
 ];
 
 const industries = [
@@ -36,29 +39,39 @@ const industries = [
 ---
 <Layout
   title="Industrial Chemicals, Solvents & Polyester Resins"
-  description="SR Group manufactures distilled chemicals, solvents, industrial chemicals, and unsaturated polyester resins from Gujarat, India, since 1997."
+  description="S R Group manufactures distilled chemicals, solvents, industrial chemicals, and unsaturated polyester resins from Gujarat, India, since 1997."
 >
-  <!-- HERO -->
   <section class="hero">
-    <div class="container hero-inner">
-      <svg class="hero-arc" viewBox="0 0 600 600" aria-hidden="true">
-        <circle cx="300" cy="300" r="280" fill="none" stroke="#C49A2A" stroke-width="1" stroke-dasharray="3 5" opacity="0.5"/>
-      </svg>
+    <div class="container hero-grid">
+      <div class="hero-main">
+        <span class="eyebrow">S R Group · Est. 1997</span>
+        <h1>Manufacturing<br/>the industrial inputs<br/>that build things.</h1>
+        <p class="hero-lede">
+          Three companies, one group: distilled chemicals and solvents, industrial chemicals,
+          and unsaturated polyester resins — manufactured in Gujarat, supplied across India and export markets.
+        </p>
+        <div class="hero-actions">
+          <a href={`${base}products`} class="btn btn-gold">View Products</a>
+          <a href={`${base}contact`} class="btn">Request a Quote</a>
+        </div>
+      </div>
 
-      <span class="eyebrow">SR Group · Since 1997</span>
-      <h1>Manufacturing the industrial<br/>inputs that build things.</h1>
-      <p class="hero-lede">
-        Three companies, one group: distilled chemicals and solvents, industrial chemicals,
-        and unsaturated polyester resins — manufactured in Gujarat and supplied across India and export markets.
-      </p>
-      <div class="hero-actions">
-        <a href="/products" class="btn btn-gold">View Products</a>
-        <a href="/contact" class="btn">Request a Quote</a>
+      <div class="hero-side">
+        <img src={`${base}logo/sr-logo-navy.png`} alt="S R Group" class="hero-mark" />
+        <dl class="hero-stats">
+          {stats.map((s) => (
+            <div class="hero-stat">
+              <dt>{s.label}</dt>
+              <dd>{s.value}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </div>
   </section>
 
-  <!-- COMPANIES -->
+  <hr class="rule-dashed container-rule" />
+
   <section class="section companies">
     <div class="container">
       <div class="section-head">
@@ -66,126 +79,119 @@ const industries = [
         <h2>Three entities. One manufacturing group.</h2>
       </div>
 
-      <div class="company-grid">
+      <div class="company-list">
         {companies.map((c) => (
-          <a href={c.href} class="company-card card">
-            <span class="company-focus">{c.focus}</span>
-            <h3>{c.name}</h3>
-            <p>{c.desc}</p>
-            <span class="company-link">Learn more →</span>
+          <a href={`${base}${c.href}`} class="company-row">
+            <span class="company-index">{c.n}</span>
+            <div class="company-body">
+              <span class="company-focus">{c.focus}</span>
+              <h3>{c.name}</h3>
+              <p>{c.desc}</p>
+            </div>
+            <span class="company-link">View products →</span>
           </a>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- STATS -->
-  <section class="stats-strip">
-    <div class="container stats-grid">
-      {stats.map((s) => (
-        <div class="stat">
-          <span class="stat-value">{s.value}</span>
-          <span class="stat-label">{s.label}</span>
-        </div>
-      ))}
-    </div>
-  </section>
-
-  <!-- INDUSTRIES -->
   <section class="section industries">
-    <div class="container">
-      <div class="section-head">
+    <div class="container industries-grid">
+      <div class="section-head no-margin">
         <span class="eyebrow">Industries Served</span>
-        <h2>Built into products across sectors.</h2>
+        <h2>Built into products<br/>across sectors.</h2>
+        <a href={`${base}industries-served`} class="btn" style="margin-top: var(--space-3);">See all industries</a>
       </div>
       <ul class="industry-list">
-        {industries.map((i) => <li>{i}</li>)}
+        {industries.map((i, idx) => (
+          <li><span class="industry-index">{String(idx + 1).padStart(2, '0')}</span>{i}</li>
+        ))}
       </ul>
-      <a href="/industries-served" class="btn">See all industries</a>
     </div>
   </section>
 
-  <!-- CTA -->
   <section class="cta-band">
+    <hr class="rule-dashed" />
     <div class="container cta-inner">
-      <Monogram size={52} class="cta-mark" />
-      <h2>Sourcing chemicals or resins for your next order?</h2>
-      <p>Talk to SR Group about capacity, specifications, and export inquiries.</p>
-      <a href="/contact" class="btn btn-gold">Get in Touch</a>
+      <img src={`${base}logo/sr-logo-navy.png`} alt="" class="cta-mark" aria-hidden="true" />
+      <div>
+        <h2>Sourcing chemicals or resins<br/>for your next order?</h2>
+        <p>Talk to S R Group about capacity, specifications, and export inquiries.</p>
+      </div>
+      <a href={`${base}contact`} class="btn btn-gold">Get in Touch</a>
     </div>
   </section>
 </Layout>
 
 <style>
-  .hero {
-    position: relative;
-    padding: var(--space-7) 0 var(--space-6);
-    overflow: hidden;
+  .hero { padding: var(--space-6) 0 var(--space-5); }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: var(--space-5);
+    align-items: end;
   }
 
-  .hero-inner {
-    position: relative;
-    max-width: 760px;
-  }
-
-  .hero-arc {
-    position: absolute;
-    top: -140px;
-    right: -220px;
-    width: 560px;
-    height: 560px;
-    z-index: 0;
-    pointer-events: none;
-  }
-
-  .hero .eyebrow {
-    margin-bottom: var(--space-2);
-  }
-
-  .hero h1 {
-    position: relative;
-    margin-bottom: var(--space-3);
-  }
+  .hero-main .eyebrow { margin-bottom: var(--space-2); }
+  .hero h1 { margin-bottom: var(--space-3); letter-spacing: -0.01em; }
 
   .hero-lede {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     color: var(--ink);
-    max-width: 560px;
+    max-width: 460px;
     margin-bottom: var(--space-4);
   }
 
-  .hero-actions {
-    display: flex;
-    gap: var(--space-2);
-    flex-wrap: wrap;
-  }
+  .hero-actions { display: flex; gap: var(--space-2); flex-wrap: wrap; }
 
-  .section-head {
+  .hero-side {
     display: flex;
     flex-direction: column;
-    gap: var(--space-1);
-    margin-bottom: var(--space-4);
-    max-width: 620px;
+    align-items: flex-end;
+    gap: var(--space-4);
+    border-left: 1px dashed var(--gold);
+    padding-left: var(--space-4);
+    height: 100%;
+    justify-content: space-between;
   }
 
-  .company-grid {
+  .hero-mark { width: 84px; height: auto; align-self: flex-end; }
+
+  .hero-stats { display: flex; flex-direction: column; gap: var(--space-2); margin: 0; text-align: right; }
+
+  .hero-stat dt {
+    font-family: var(--font-data);
+    font-size: 0.66rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-faint);
+    margin-bottom: 0.15rem;
+  }
+
+  .hero-stat dd { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; color: var(--navy); margin: 0; }
+
+  .container-rule { max-width: var(--container); margin: 0 auto; }
+
+  .section-head { display: flex; flex-direction: column; gap: var(--space-1); margin-bottom: var(--space-5); max-width: 620px; }
+  .section-head.no-margin { margin-bottom: 0; }
+
+  .company-list { display: flex; flex-direction: column; }
+
+  .company-row {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: var(--space-3);
+    grid-template-columns: 90px 1fr auto;
+    align-items: center;
+    gap: var(--space-4);
+    padding: var(--space-4) 0;
+    border-top: 1px solid var(--line);
+    transition: opacity 0.2s ease;
   }
 
-  .company-card {
-    padding: var(--space-4) var(--space-3);
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-1);
-    transition: border-color 0.2s ease, transform 0.2s ease;
-  }
+  .company-list a:last-child { border-bottom: 1px solid var(--line); }
+  .company-row:hover { opacity: 0.72; }
 
-  .company-card:hover {
-    border-color: var(--gold);
-    transform: translateY(-3px);
-  }
+  .company-index { font-family: var(--font-display); font-size: 2.4rem; color: var(--gold); font-weight: 500; line-height: 1; }
 
   .company-focus {
     font-family: var(--font-data);
@@ -193,101 +199,61 @@ const industries = [
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--gold);
+    display: block;
+    margin-bottom: 0.3rem;
   }
 
-  .company-card h3 {
-    margin-top: 0.3rem;
-  }
+  .company-body h3 { margin-bottom: 0.4rem; }
+  .company-body p { font-size: 0.92rem; color: var(--ink-faint); max-width: 520px; }
+  .company-link { font-size: 0.85rem; font-weight: 600; color: var(--navy); white-space: nowrap; }
 
-  .company-card p {
-    font-size: 0.92rem;
-    color: var(--ink-faint);
-    flex-grow: 1;
-  }
+  .industries-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: var(--space-5); }
 
-  .company-link {
-    margin-top: var(--space-1);
-    font-size: 0.85rem;
-    font-weight: 600;
-    color: var(--navy);
-  }
-
-  .stats-strip {
-    background: var(--navy);
-    padding: var(--space-4) 0;
-  }
-
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: var(--space-3);
-  }
-
-  .stat {
-    display: flex;
-    flex-direction: column;
-    gap: 0.3rem;
-    border-left: 1px solid rgba(196, 154, 42, 0.35);
-    padding-left: var(--space-2);
-  }
-
-  .stat-value {
-    font-family: var(--font-display);
-    font-size: 1.9rem;
-    font-weight: 600;
-    color: var(--cream);
-  }
-
-  .stat-label {
-    font-family: var(--font-data);
-    font-size: 0.7rem;
-    letter-spacing: 0.06em;
-    text-transform: uppercase;
-    color: var(--gold-soft);
-  }
-
-  .industry-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 var(--space-4);
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.7rem;
-  }
+  .industry-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; }
 
   .industry-list li {
-    font-size: 0.88rem;
-    padding: 0.55em 1.1em;
-    border: 1px solid var(--line);
-    border-radius: 999px;
-    background: var(--paper);
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-2);
+    font-family: var(--font-display);
+    font-size: 1.35rem;
+    color: var(--navy);
+    padding: var(--space-2) 0;
+    border-top: 1px solid var(--line);
   }
 
-  .cta-band {
-    background: var(--paper);
-    border-top: 1px solid var(--line);
-    padding: var(--space-6) 0;
-    text-align: center;
-  }
+  .industry-list li:last-child { border-bottom: 1px solid var(--line); }
+  .industry-index { font-family: var(--font-data); font-size: 0.75rem; color: var(--gold); }
+
+  .cta-band { padding: var(--space-6) 0 var(--space-5); }
 
   .cta-inner {
-    max-width: 560px;
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: auto 1fr auto;
     align-items: center;
-    gap: var(--space-2);
+    gap: var(--space-4);
+    padding-top: var(--space-4);
   }
 
-  .cta-inner h2 { margin-top: var(--space-1); }
-
-  .cta-inner p {
-    color: var(--ink-faint);
-    margin-bottom: var(--space-1);
-  }
+  .cta-mark { width: 56px; height: auto; opacity: 0.9; }
+  .cta-inner p { color: var(--ink-faint); margin-top: var(--space-1); }
 
   @media (max-width: 860px) {
-    .company-grid { grid-template-columns: 1fr; }
-    .stats-grid { grid-template-columns: repeat(2, 1fr); }
-    .hero-arc { display: none; }
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero-side {
+      flex-direction: row;
+      align-items: center;
+      border-left: none;
+      border-top: 1px dashed var(--gold);
+      padding-left: 0;
+      padding-top: var(--space-3);
+      justify-content: space-between;
+    }
+    .hero-stats { flex-direction: row; text-align: left; gap: var(--space-3); }
+    .company-row { grid-template-columns: 50px 1fr; }
+    .company-link { grid-column: 2; }
+    .industries-grid { grid-template-columns: 1fr; }
+    .cta-inner { grid-template-columns: 1fr; text-align: center; }
+    .cta-mark { justify-self: center; }
   }
 </style>
